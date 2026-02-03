@@ -1,10 +1,23 @@
 export default function handler(req, res) {
+  // 1. Handle the Secret Flag (HEAD request)
   if (req.method === "HEAD") {
-    // This provides the flag in the response headers
     res.setHeader("X-Marauders-Map", "EXC{th3_r34l_fl@g!}");
     return res.status(200).end();
   }
 
-  // Normal browser requests will fall through to your index.html
-  return res.status(404).end();
+  // 2. Handle the Website (GET request)
+  // Since the rewrite blocks index.html, we render the HTML right here:
+  res.setHeader("Content-Type", "text/html");
+  return res.status(200).send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Marauders Map</title>
+    </head>
+    <body>
+        <h1>I solemnly swear that I am up to no good.</h1>
+    </body>
+    </html>
+  `);
 }
