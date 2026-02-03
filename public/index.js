@@ -4,5 +4,5 @@ export default function handler(req, res) {
     return res.status(200).end();
   }
 
-  return res.status(404).json({ message: "Nothing here" });
+  return res.status(200).send("Nothing here");
 }
