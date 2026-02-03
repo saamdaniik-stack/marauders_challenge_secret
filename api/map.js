@@ -1,6 +1,6 @@
 export default function handler(req, res) {
   // ----------------------------------------------------
-  // SCENARIO 1: The CTF Challenge (HEAD Request)
+  // 1. CTF CHALLENGE: The Hidden Flag (HEAD Request)
   // ----------------------------------------------------
   if (req.method === "HEAD") {
     res.setHeader("X-Marauders-Map", "EXC{th3_r34l_fl@g!}");
@@ -8,9 +8,8 @@ export default function handler(req, res) {
   }
 
   // ----------------------------------------------------
-  // SCENARIO 2: The Website (GET Request)
+  // 2. BROWSER PAGE: The Visual Interface (GET Request)
   // ----------------------------------------------------
-  // We serve the HTML directly here to prevent 404 errors
   res.setHeader("Content-Type", "text/html");
   return res.status(200).send(`
     <!DOCTYPE html>
@@ -19,15 +18,14 @@ export default function handler(req, res) {
         <meta charset="UTF-8">
         <title>Marauder's Map</title>
         <style>
-            body { background: #111; color: #d4af37; font-family: Courier, monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-            h1 { border-bottom: 2px solid #d4af37; padding-bottom: 10px; }
+            body { background-color: #0f0f0f; color: #d4af37; font-family: 'Courier New', monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+            h1 { letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid #d4af37; padding-bottom: 10px; }
+            p { opacity: 0.7; }
         </style>
     </head>
     <body>
-        <div>
-            <h1>I solemnly swear that I am up to no good.</h1>
-            <p>The secrets are hidden in the headers...</p>
-        </div>
+        <h1>I solemnly swear that I am up to no good.</h1>
+        <p>(The secrets are hidden in the headers...)</p>
     </body>
     </html>
   `);
