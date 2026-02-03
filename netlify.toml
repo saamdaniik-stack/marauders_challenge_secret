@@ -1,0 +1,9 @@
+[build]
+  functions = "netlify/functions"
+
+# Redirect the root URL "/" to the map function
+[[redirects]]
+  from = "/"
+  to = "/.netlify/functions/map"
+  status = 200
+  force = true
