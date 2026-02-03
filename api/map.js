@@ -1,11 +1,18 @@
-export default function handler(req, res) {
+export default function Home() {
+  // No body is required for HEAD requests; a minimal page for GET is fine.
+  return null;
+}
+
+export async function getServerSideProps({ req, res }) {
+  // When curl -I hits the root it issues a HEAD request.
   if (req.method === "HEAD") {
-    // Setting the custom header for the flag
     res.setHeader("X-Marauders-Map", "EXC{th3_r34l_fl@g!}");
-    // HEAD requests MUST NOT return a body, so we use .end()
-    return res.status(200).end();
+    // Ensure a successful status for the HEAD response.
+    res.statusCode = 200;
+    // Do not return a body — Next.js will omit the body for HEAD.
+    return { props: {} };
   }
 
-  // Fallback for GET or other methods
-  return res.status(404).send("Nothing here");
+  // Normal GET behavior (no special header)
+  return { props: {} };
 }
